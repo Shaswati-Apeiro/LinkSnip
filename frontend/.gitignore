@@ -1,0 +1,16 @@
+# Environment — never commit real values
+.env
+.env.local
+.env.*
+!.env.example
+
+# Dependencies / build
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*

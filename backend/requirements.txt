@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+python-multipart
+sqlmodel==0.0.44 
+passlib
+pyjwt
+email-validator
+geoip2fast
+openpyxl

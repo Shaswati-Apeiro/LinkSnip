@@ -1,0 +1,47 @@
+# ---- Environment variables - NEVER commit real secrets ----
+# .env, .env.local, and any .env.* (except .env.example / .env.*.example)
+.env
+.env.local
+.env.*
+!.env.example
+!*.env.example
+!**/.env.example
+
+# ---- Python (backend) ----
+backend/myenv/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Node / frontend ----
+node_modules/
+frontend/dist/
+frontend/build/
+.vite/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+
+# ---- Database files (local SQLite) ----
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+backend/data/
+
+# ---- Docker ----
+# (no secrets commonly land here; add anything local you don't want shared)
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

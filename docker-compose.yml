@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: linksnip-backend
+    ports:
+      - "8000:8000"
+    # Inject backend/.env (holds SAFE_BROWSING_API_KEY etc.) into the container.
+    env_file:
+      - ./backend/.env
+    environment:
+      # Persist SQLite on the dedicated /data volume (not the /app code path).
+      - DATABASE_URL=sqlite:////data/linksnip.db
+      # Short-link redirect status: 302 (default, counts every click) or 301.
+      # Set to 301 to switch to cacheable redirects.
+      - REDIRECT_STATUS=302
+    volumes:
+      - linksnip_db:/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: linksnip-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5174:5173"
+    environment:
+      # Browser reaches the backend via the host, and short-links (redirects served
+      # by the backend's /{code} route) are built against the same 8000 host/port.
+      - VITE_API_BASE=http://127.0.0.1:8000
+    restart: unless-stopped
+
+volumes:
+  linksnip_db:
